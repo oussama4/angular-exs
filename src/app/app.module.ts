@@ -14,6 +14,7 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { MatSlideToggleModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 
 
@@ -63,7 +64,8 @@ import { LoginComponent } from './login/login.component';
     MatCheckboxModule,
     MatInputModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [LoginComponent],
   providers: [DishService, PromotionService, LeaderService],
