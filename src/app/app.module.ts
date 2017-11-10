@@ -17,8 +17,7 @@ import { MatSlideToggleModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material';
 import { MatSliderModule } from '@angular/material';
-
-
+import { RestangularModule, Restangular } from 'ngx-restangular'
 
 import 'hammerjs';
 
@@ -39,6 +38,7 @@ import { ProcessHttpmsgService } from './services/process-httpmsg.service';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { baseURL } from './shared/baseurl';
+import { RestangularConfigFactory } from './shared/restConfig';
 
 @NgModule({
   declarations: [
@@ -71,7 +71,8 @@ import { baseURL } from './shared/baseurl';
     MatSlideToggleModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    RestangularModule.forRoot(RestangularConfigFactory)
   ],
   entryComponents: [LoginComponent],
   providers: [DishService,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { RestangularModule, Restangular } from 'ngx-restangular';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -14,28 +15,20 @@ import { baseURL } from '../shared/baseurl';
 @Injectable()
 export class DishService {
 
-  constructor(private http: Http,
+  constructor(private restangular: Restangular,
               private processHttpMsg: ProcessHttpmsgService) { }
 
   getDishes(): Observable<Dish[]> {
-    return this.http.get(baseURL + 'dishes')
-      // tslint:disable-next-line:arrow-return-shorthand
-      .map(res => { return this.processHttpMsg.extractData(res); })
-      .catch(error => { return this.processHttpMsg.handleError(error); });
+    return this.restangular.all('dishes').getList();
   }
 
   getDish(id: number): Observable<Dish> {
-    return this.http.get(baseURL + 'dishes/' + id)
-    // tslint:disable-next-line:arrow-return-shorthand
-      .map(res => { return this.processHttpMsg.extractData(res); })
-      .catch(error => { return this.processHttpMsg.handleError(error); });
+    return this.restangular.one('dishes', id).get();
   }
 
   getFeaturedDish(): Observable<Dish> {
-    return this.http.get(baseURL + 'dishes?featured=true')
-    // tslint:disable-next-line:arrow-return-shorthand
-      .map(res => { return this.processHttpMsg.extractData(res)[0]; })
-      .catch(error => { return this.processHttpMsg.handleError(error); });
+    return this.restangular.all('dishes').getList({featured: true})
+      .map(dishes => dishes[0]);
   }
 
   getDishIds(): Observable<number[]> {
