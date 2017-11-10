@@ -20,23 +20,27 @@ export class DishService {
   getDishes(): Observable<Dish[]> {
     return this.http.get(baseURL + 'dishes')
       // tslint:disable-next-line:arrow-return-shorthand
-      .map(res => { return this.processHttpMsg.extractData(res); });
+      .map(res => { return this.processHttpMsg.extractData(res); })
+      .catch(error => { return this.processHttpMsg.handleError(error); });
   }
 
   getDish(id: number): Observable<Dish> {
     return this.http.get(baseURL + 'dishes/' + id)
     // tslint:disable-next-line:arrow-return-shorthand
-      .map(res => { return this.processHttpMsg.extractData(res); });
+      .map(res => { return this.processHttpMsg.extractData(res); })
+      .catch(error => { return this.processHttpMsg.handleError(error); });
   }
 
   getFeaturedDish(): Observable<Dish> {
     return this.http.get(baseURL + 'dishes?featured=true')
     // tslint:disable-next-line:arrow-return-shorthand
-      .map(res => { return this.processHttpMsg.extractData(res)[0]; });
+      .map(res => { return this.processHttpMsg.extractData(res)[0]; })
+      .catch(error => { return this.processHttpMsg.handleError(error); });
   }
 
   getDishIds(): Observable<number[]> {
     return this.getDishes()
-      .map(dishes => { return dishes.map(dish => dish.id); });
+      .map(dishes => { return dishes.map(dish => dish.id) })
+      .catch(error => { return error; } );
   }
 }
