@@ -9,7 +9,6 @@ import 'rxjs/add/operator/map';
 
 import { ProcessHttpmsgService } from './process-httpmsg.service';
 import { Dish } from '../shared/dish';
-import { DISHES } from '../shared/dishes';
 import { baseURL } from '../shared/baseurl';
 
 @Injectable()
